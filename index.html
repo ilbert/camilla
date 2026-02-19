@@ -105,12 +105,21 @@
     "camillas manuales":"🔧",
     "camillas de exploracion":"🔍",
     "camillas hidraulicas":"💧",
+    "camillas de masaje":"💆",
     "camillas fijas":"📌",
     "camillas plegables":"🔄",
     "camillas por especialidad":"🩺",
     "camillas de reconocimiento medico":"🔍",
-    "camillas por marca":"🏷️"
+    "camillas por marca":"⭐",
+    "camillas por marcas":"⭐"
   };
+
+  function getIcon(name) {
+    const n = norm(name);
+    if (ICON_MAP[n]) return ICON_MAP[n];
+    if (n.includes("por marca")) return "⭐";
+    return "";
+  }
 
   let menuTree = [];
 
@@ -182,7 +191,7 @@
     menuTree.forEach(item => {
       const li = document.createElement("li");
       li.className = "item";
-      const icon = ICON_MAP[norm(item.name)] ?? "";
+      const icon = getIcon(item.name);
       const iconHtml = icon ? `<span class="icon">${icon}</span>` : "";
       li.innerHTML = `<span class="label">${iconHtml}<span class="text">${item.name}</span></span>${item.children.length ? CHEVRON_SVG : ''}`;
       li.onclick = () => handleItemClick(item, 0, li, container, col);
@@ -207,7 +216,7 @@
     items.forEach(item => {
       const li = document.createElement("li");
       li.className = "item";
-      const icon = ICON_MAP[norm(item.name)] ?? "";
+      const icon = getIcon(item.name);
       const iconHtml = icon ? `<span class="icon">${icon}</span>` : "";
       li.innerHTML = `<span class="label">${iconHtml}<span class="text">${item.name}</span></span>${item.children.length ? CHEVRON_SVG : ''}`;
       li.onclick = () => handleItemClick(item, level, li, container, col);
