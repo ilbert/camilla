@@ -100,12 +100,12 @@
   const BACK_CHEVRON_SVG = `<span class="chevron" style="transform:rotate(180deg)"><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></span>`;
 
   const ICON_MAP = {
-    "camillas":"🛏️",
-    "camillas electricas":"🛏️",
-    "camillas manuales":"🛏️",
-    "camillas de exploracion":"🛏️",
-    "camillas hidraulicas":"🛏️",
-    "camillas de masaje":"🛏️"
+    "camillas":"",
+    "camillas electricas":"⚡",
+    "camillas manuales":"🔧",
+    "camillas de exploracion":"🔍",
+    "camillas hidraulicas":"💧",
+    "camillas de masaje":"💆"
   };
 
   let menuTree = [];
@@ -178,8 +178,9 @@
     menuTree.forEach(item => {
       const li = document.createElement("li");
       li.className = "item";
-      const icon = ICON_MAP[norm(item.name)] || "🛏️";
-      li.innerHTML = `<span class="label"><span class="icon">${icon}</span><span class="text">${item.name}</span></span>${item.children.length ? CHEVRON_SVG : ''}`;
+      const icon = ICON_MAP[norm(item.name)] ?? "";
+      const iconHtml = icon ? `<span class="icon">${icon}</span>` : "";
+      li.innerHTML = `<span class="label">${iconHtml}<span class="text">${item.name}</span></span>${item.children.length ? CHEVRON_SVG : ''}`;
       li.onclick = () => handleItemClick(item, 0, li, container, col);
       ul.appendChild(li);
     });
@@ -202,8 +203,9 @@
     items.forEach(item => {
       const li = document.createElement("li");
       li.className = "item";
-      const icon = ICON_MAP[norm(item.name)] || "🛏️";
-      li.innerHTML = `<span class="label"><span class="icon">${icon}</span><span class="text">${item.name}</span></span>${item.children.length ? CHEVRON_SVG : ''}`;
+      const icon = ICON_MAP[norm(item.name)] ?? "";
+      const iconHtml = icon ? `<span class="icon">${icon}</span>` : "";
+      li.innerHTML = `<span class="label">${iconHtml}<span class="text">${item.name}</span></span>${item.children.length ? CHEVRON_SVG : ''}`;
       li.onclick = () => handleItemClick(item, level, li, container, col);
       ul.appendChild(li);
     });
